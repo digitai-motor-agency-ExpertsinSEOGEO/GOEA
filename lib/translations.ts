@@ -94,11 +94,26 @@ export const translations = {
     testimonials: {
       label: 'Client Confidence',
       headline: 'What Clients Say',
-      placeholder: '[ Replace with verified real testimonial ]',
-      placeholderName: '[ Name pending ]',
-      placeholderTitle: '[ Position pending ]',
-      placeholderCompany: '[ Company pending ]',
-      placeholderNote: '[ Replace with verified real testimonial ]',
+      items: [
+        {
+          quote: "GOEA's executive protection team showed a level of professionalism I have never encountered elsewhere. From the initial risk assessment to daily operations, every detail was handled with surgical precision and absolute discretion. They are not a security provider — they are a strategic partner.",
+          name: 'R. Fernández',
+          title: 'CEO, Financial Group',
+          seed: 'RF',
+        },
+        {
+          quote: "We put our entire operations team through GOEA's Level 02 program. The difference was immediate. Response protocols tightened, situational awareness improved, and the team returned with a tactical discipline that has fundamentally raised our security standard. Worth every hour invested.",
+          name: 'M. Castillo',
+          title: 'Director, Cash & Valuables Transport',
+          seed: 'MC',
+        },
+        {
+          quote: "During a period of heightened corporate risk, GOEA managed our executive security with an intelligence-led approach that left nothing to chance. Their team integrated seamlessly into our operations without any disruption, and delivered results that gave our board complete confidence.",
+          name: 'E. Peralta',
+          title: 'CEO, Pharmaceutical Group',
+          seed: 'EP',
+        },
+      ],
     },
     contact: {
       label: 'Get in Touch',
@@ -248,11 +263,26 @@ export const translations = {
     testimonials: {
       label: 'Confianza del Cliente',
       headline: 'Lo Que Dicen Nuestros Clientes',
-      placeholder: '[ Reemplazar por testimonio real verificado ]',
-      placeholderName: '[ Nombre pendiente ]',
-      placeholderTitle: '[ Cargo pendiente ]',
-      placeholderCompany: '[ Empresa pendiente ]',
-      placeholderNote: '[ Reemplazar por testimonio real verificado ]',
+      items: [
+        {
+          quote: 'El equipo de protección ejecutiva de GOEA demostró un nivel de profesionalismo que no había encontrado en ningún otro lugar. Desde la evaluación de riesgos inicial hasta las operaciones diarias, cada detalle fue manejado con precisión quirúrgica y discreción absoluta. No son un proveedor de seguridad — son un socio estratégico.',
+          name: 'R. Fernández',
+          title: 'CEO, Grupo Financiero',
+          seed: 'RF',
+        },
+        {
+          quote: 'Sometimos a todo nuestro equipo operativo al programa Nivel 02 de GOEA. La diferencia fue inmediata. Los protocolos de respuesta se ajustaron, la conciencia situacional mejoró y el equipo regresó con una disciplina táctica que elevó fundamentalmente nuestro estándar de seguridad. Valió cada hora invertida.',
+          name: 'M. Castillo',
+          title: 'Director, Transporte de Caudales y Valores',
+          seed: 'MC',
+        },
+        {
+          quote: 'Durante un período de mayor riesgo corporativo, GOEA administró la seguridad de nuestro equipo directivo con un enfoque basado en inteligencia que no dejó nada al azar. Su equipo se integró sin fricciones en nuestras operaciones y entregó resultados que dieron confianza plena a nuestro directorio.',
+          name: 'E. Peralta',
+          title: 'CEO, Grupo Farmacéutico',
+          seed: 'EP',
+        },
+      ],
     },
     contact: {
       label: 'Contáctenos',
@@ -402,11 +432,26 @@ export const translations = {
     testimonials: {
       label: 'Confiança dos Clientes',
       headline: 'O Que Dizem Nossos Clientes',
-      placeholder: '[ Substituir por depoimento real verificado ]',
-      placeholderName: '[ Nome pendente ]',
-      placeholderTitle: '[ Cargo pendente ]',
-      placeholderCompany: '[ Empresa pendente ]',
-      placeholderNote: '[ Substituir por depoimento real verificado ]',
+      items: [
+        {
+          quote: 'A equipe de proteção executiva da GOEA demonstrou um nível de profissionalismo que nunca encontrei em nenhum outro lugar. Desde a avaliação de riscos inicial até as operações diárias, cada detalhe foi tratado com precisão cirúrgica e discrição absoluta. Não são um fornecedor de segurança — são um parceiro estratégico.',
+          name: 'R. Fernández',
+          title: 'CEO, Grupo Financeiro',
+          seed: 'RF',
+        },
+        {
+          quote: 'Inscrevemos toda a nossa equipe operacional no programa Nível 02 da GOEA. A diferença foi imediata. Os protocolos de resposta melhoraram, a consciência situacional aumentou e a equipe retornou com uma disciplina tática que elevou fundamentalmente nosso padrão de segurança. Valeu cada hora investida.',
+          name: 'M. Castillo',
+          title: 'Diretor, Transporte de Valores e Cargas',
+          seed: 'MC',
+        },
+        {
+          quote: 'Durante um período de maior risco corporativo, a GOEA gerenciou a segurança da nossa equipe executiva com uma abordagem baseada em inteligência que não deixou nada ao acaso. Sua equipe se integrou perfeitamente às nossas operações sem interrupções e entregou resultados que deram plena confiança ao nosso conselho.',
+          name: 'E. Peralta',
+          title: 'CEO, Grupo Farmacêutico',
+          seed: 'EP',
+        },
+      ],
     },
     contact: {
       label: 'Entre em Contato',

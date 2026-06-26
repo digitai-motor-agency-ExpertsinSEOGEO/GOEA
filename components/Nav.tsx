@@ -143,6 +143,34 @@ export default function Nav() {
             </button>
           </div>
 
+          {/* Selector de idioma siempre visible en mobile — entre logo y hamburguesa */}
+          <div className="flex md:hidden items-center gap-0.5">
+            {LANGS.map((l, i) => (
+              <span key={l} className="flex items-center">
+                <button
+                  onClick={() => setLang(l)}
+                  className="cursor-pointer transition-colors"
+                  style={{
+                    color: lang === l ? '#C8A349' : '#8A9099',
+                    fontWeight: lang === l ? 700 : 400,
+                    fontFamily: 'var(--font-inter), sans-serif',
+                    fontSize: '11px',
+                    letterSpacing: '0.08em',
+                    background: 'none',
+                    border: 'none',
+                    padding: '4px 5px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {l.toUpperCase()}
+                </button>
+                {i < LANGS.length - 1 && (
+                  <span style={{ color: 'rgba(138,144,153,0.35)', fontSize: '9px' }}>|</span>
+                )}
+              </span>
+            ))}
+          </div>
+
           {/* Botón hamburguesa mobile */}
           <button
             className="md:hidden p-2"
@@ -186,30 +214,6 @@ export default function Nav() {
                   {link.label}
                 </button>
               ))}
-              {/* Language switcher mobile */}
-              <div className="flex items-center gap-2 py-2">
-                {LANGS.map((l, i) => (
-                  <span key={l} className="flex items-center">
-                    <button
-                      onClick={() => { setLang(l); setMobileOpen(false) }}
-                      className="text-xs font-medium tracking-widest uppercase cursor-pointer"
-                      style={{
-                        color: lang === l ? '#C8A349' : '#8A9099',
-                        fontWeight: lang === l ? 700 : 400,
-                        fontFamily: 'var(--font-inter), sans-serif',
-                        background: 'none',
-                        border: 'none',
-                        padding: '2px 4px',
-                      }}
-                    >
-                      {l.toUpperCase()}
-                    </button>
-                    {i < LANGS.length - 1 && (
-                      <span style={{ color: 'rgba(138,144,153,0.4)', fontSize: '10px' }}>|</span>
-                    )}
-                  </span>
-                ))}
-              </div>
               <button
                 onClick={() => handleLinkClick('#contact')}
                 className="mt-2 py-3 text-sm font-medium tracking-widest uppercase text-center cursor-pointer"

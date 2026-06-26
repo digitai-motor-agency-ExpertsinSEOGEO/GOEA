@@ -39,24 +39,34 @@ export default function Hero() {
       className="relative w-full overflow-hidden"
       style={{ height: '100svh', minHeight: '600px', backgroundColor: '#0F1115' }}
     >
-      {/* ── Video de fondo ── */}
+      {/* ── Video de fondo — dos elementos separados para desktop/mobile ── */}
       {!prefersReducedMotion && mounted && (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/images/hero-poster.jpg"
-          aria-hidden="true"
-        >
-          <source
-            src="/video/hero-desktop.mp4"
-            media="(min-width: 768px)"
-            type="video/mp4"
-          />
-          <source src="/video/hero-mobile.mp4" type="video/mp4" />
-        </video>
+        <>
+          {/* Desktop: video landscape atmosférico */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover hidden md:block"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          >
+            <source src="/video/hero-desktop.mp4" type="video/mp4" />
+          </video>
+
+          {/* Mobile: video con encuadre ajustado para pantalla vertical */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover block md:hidden"
+            style={{ objectPosition: 'center 15%' }}
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          >
+            <source src="/video/hero-mobile.mp4" type="video/mp4" />
+          </video>
+        </>
       )}
 
       {/* Poster estático cuando prefers-reduced-motion está activo */}
@@ -72,12 +82,20 @@ export default function Hero() {
         />
       )}
 
-      {/* ── Gradiente de overlay ── */}
+      {/* ── Gradiente de overlay — más oscuro en mobile para legibilidad ── */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hidden md:block"
         style={{
           background:
             'linear-gradient(to right, rgba(15,17,21,0.95) 0%, rgba(15,17,21,0.7) 50%, rgba(15,17,21,0.4) 100%)',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 block md:hidden"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgba(15,17,21,0.6) 0%, rgba(15,17,21,0.75) 50%, rgba(15,17,21,0.9) 100%)',
         }}
         aria-hidden="true"
       />
@@ -174,7 +192,7 @@ export default function Hero() {
               className="font-black uppercase leading-none mb-6"
               style={{
                 fontFamily: 'var(--font-archivo), sans-serif',
-                fontSize: 'clamp(3.5rem, 8vw, 9rem)',
+                fontSize: 'clamp(2.6rem, 8vw, 9rem)',
                 letterSpacing: '-0.02em',
                 color: '#F5F5F3',
                 lineHeight: '0.95',

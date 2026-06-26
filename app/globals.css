@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* ─── Paleta GOEA y tokens de diseño (Tailwind v4 @theme) ─── */
+@theme {
+  --color-base:      #0F1115;
+  --color-surface:   #15181E;
+  --color-primary:   #3E4A3F;
+  --color-secondary: #5A6B4D;
+  --color-accent:    #C8A349;
+  --color-ink:       #F5F5F3;
+  --color-muted:     #8A9099;
+
+  --font-archivo: var(--font-archivo);
+  --font-inter:   var(--font-inter);
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ─── Variables CSS globales ─────────────────────────────── */
+:root {
+  --background: #0F1115;
+  --foreground: #F5F5F3;
+  color-scheme: dark;
+}
+
+/* ─── Base ────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  /* Ocultar scrollbar preservando funcionalidad */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Focus visible con acento dorado ───────────────────── */
+:focus-visible {
+  outline: 2px solid #C8A349;
+  outline-offset: 2px;
+}
+
+/* ─── Grilla táctica sutil (overlay sobre hero/secciones) ── */
+.tactical-grid {
+  background-image:
+    linear-gradient(rgba(200, 163, 73, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 163, 73, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Patrón diagonal para secciones alternativas ────────── */
+.diagonal-lines {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(200, 163, 73, 0.025) 10px,
+    rgba(200, 163, 73, 0.025) 11px
+  );
+}
+
+/* ─── Glassmorphism helper ───────────────────────────────── */
+.glass-card {
+  background: rgba(21, 24, 30, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}

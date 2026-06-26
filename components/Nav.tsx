@@ -4,18 +4,23 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
+import type { Lang } from '@/lib/translations'
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Training', href: '#training' },
-  { label: 'Contact', href: '#contact' },
-]
+const LANGS: Lang[] = ['en', 'es', 'pt']
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
+  const { lang, setLang, t } = useLanguage()
+
+  const navLinks = [
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.services, href: '#services' },
+    { label: t.nav.training, href: '#training' },
+    { label: t.nav.contact, href: '#contact' },
+  ]
 
   // Detectar scroll para aplicar fondo glassmorphism
   useEffect(() => {
@@ -86,8 +91,34 @@ export default function Nav() {
             ))}
           </nav>
 
-          {/* CTA escritorio */}
+          {/* CTA + Language switcher desktop */}
           <div className="hidden md:flex items-center gap-4">
+            {/* Language switcher */}
+            <div className="flex items-center gap-1">
+              {LANGS.map((l, i) => (
+                <span key={l} className="flex items-center">
+                  <button
+                    onClick={() => setLang(l)}
+                    className="text-xs font-medium tracking-widest uppercase cursor-pointer transition-colors"
+                    style={{
+                      color: lang === l ? '#C8A349' : '#8A9099',
+                      fontWeight: lang === l ? 700 : 400,
+                      fontFamily: 'var(--font-inter), sans-serif',
+                      letterSpacing: '0.1em',
+                      background: 'none',
+                      border: 'none',
+                      padding: '2px 4px',
+                    }}
+                  >
+                    {l.toUpperCase()}
+                  </button>
+                  {i < LANGS.length - 1 && (
+                    <span style={{ color: 'rgba(138,144,153,0.4)', fontSize: '10px' }}>|</span>
+                  )}
+                </span>
+              ))}
+            </div>
+
             <button
               onClick={() => handleLinkClick('#contact')}
               className="px-5 py-2 text-sm font-medium tracking-widest uppercase border transition-all duration-300 cursor-pointer"
@@ -108,7 +139,7 @@ export default function Nav() {
                 el.style.color = '#C8A349'
               }}
             >
-              Contact
+              {t.nav.cta}
             </button>
           </div>
 
@@ -155,6 +186,30 @@ export default function Nav() {
                   {link.label}
                 </button>
               ))}
+              {/* Language switcher mobile */}
+              <div className="flex items-center gap-2 py-2">
+                {LANGS.map((l, i) => (
+                  <span key={l} className="flex items-center">
+                    <button
+                      onClick={() => { setLang(l); setMobileOpen(false) }}
+                      className="text-xs font-medium tracking-widest uppercase cursor-pointer"
+                      style={{
+                        color: lang === l ? '#C8A349' : '#8A9099',
+                        fontWeight: lang === l ? 700 : 400,
+                        fontFamily: 'var(--font-inter), sans-serif',
+                        background: 'none',
+                        border: 'none',
+                        padding: '2px 4px',
+                      }}
+                    >
+                      {l.toUpperCase()}
+                    </button>
+                    {i < LANGS.length - 1 && (
+                      <span style={{ color: 'rgba(138,144,153,0.4)', fontSize: '10px' }}>|</span>
+                    )}
+                  </span>
+                ))}
+              </div>
               <button
                 onClick={() => handleLinkClick('#contact')}
                 className="mt-2 py-3 text-sm font-medium tracking-widest uppercase text-center cursor-pointer"
@@ -165,7 +220,7 @@ export default function Nav() {
                   letterSpacing: '0.1em',
                 }}
               >
-                Contact
+                {t.nav.cta}
               </button>
             </nav>
           </motion.div>

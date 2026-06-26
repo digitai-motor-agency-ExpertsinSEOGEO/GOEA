@@ -4,32 +4,9 @@
 import Image from 'next/image'
 import Reveal from './Reveal'
 import { Star } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
-// IMPORTANTE: Todos estos testimonios son placeholders — deben ser reemplazados
-// por testimonios reales verificados antes de publicar el sitio.
-const testimonials = [
-  {
-    name: '[ Nombre pendiente ]',
-    title: '[ Cargo pendiente ]',
-    company: '[ Empresa pendiente ]',
-    quote: '[ Insertar testimonio real aquí ]',
-    avatarSeed: 'JP',
-  },
-  {
-    name: '[ Nombre pendiente ]',
-    title: '[ Cargo pendiente ]',
-    company: '[ Empresa pendiente ]',
-    quote: '[ Insertar testimonio real aquí ]',
-    avatarSeed: 'MR',
-  },
-  {
-    name: '[ Nombre pendiente ]',
-    title: '[ Cargo pendiente ]',
-    company: '[ Empresa pendiente ]',
-    quote: '[ Insertar testimonio real aquí ]',
-    avatarSeed: 'AC',
-  },
-]
+const avatarSeeds = ['JP', 'MR', 'AC']
 
 // Cinco estrellas doradas
 function Stars() {
@@ -43,6 +20,8 @@ function Stars() {
 }
 
 export default function Testimonials() {
+  const { t } = useLanguage()
+
   return (
     <section
       className="py-24 md:py-32"
@@ -56,7 +35,7 @@ export default function Testimonials() {
               className="text-xs font-medium tracking-widest uppercase mb-4"
               style={{ color: '#C8A349', letterSpacing: '0.25em', fontFamily: 'var(--font-inter), sans-serif' }}
             >
-              Client Confidence
+              {t.testimonials.label}
             </p>
             <h2
               className="font-black uppercase"
@@ -67,14 +46,14 @@ export default function Testimonials() {
                 letterSpacing: '-0.01em',
               }}
             >
-              What Clients Say
+              {t.testimonials.headline}
             </h2>
           </div>
         </Reveal>
 
         {/* Grid de testimonios */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, i) => (
+          {avatarSeeds.map((seed, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <div
                 className="rounded-xl p-8 flex flex-col h-full"
@@ -97,7 +76,7 @@ export default function Testimonials() {
                     fontStyle: 'italic',
                   }}
                 >
-                  &ldquo;{testimonial.quote}&rdquo;
+                  &ldquo;{t.testimonials.placeholder}&rdquo;
                 </blockquote>
 
                 {/* Aviso de placeholder */}
@@ -110,15 +89,15 @@ export default function Testimonials() {
                     border: '1px dashed rgba(90, 107, 77, 0.4)',
                   }}
                 >
-                  [ Reemplazar por testimonio real verificado ]
+                  {t.testimonials.placeholderNote}
                 </p>
 
                 {/* Perfil del cliente */}
                 <div className="flex items-center gap-3">
                   <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                     <Image
-                      src={`https://ui-avatars.com/api/?name=${testimonial.avatarSeed}&background=3E4A3F&color=C8A349&size=40&bold=true`}
-                      alt={`${testimonial.name} avatar`}
+                      src={`https://ui-avatars.com/api/?name=${seed}&background=3E4A3F&color=C8A349&size=40&bold=true`}
+                      alt={`${t.testimonials.placeholderName} avatar`}
                       width={40}
                       height={40}
                       className="rounded-full"
@@ -129,14 +108,13 @@ export default function Testimonials() {
                       className="font-medium text-sm"
                       style={{ color: '#F5F5F3', fontFamily: 'var(--font-inter), sans-serif' }}
                     >
-                      {testimonial.name}
+                      {t.testimonials.placeholderName}
                     </p>
                     <p
                       className="text-xs"
                       style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif' }}
                     >
-                      {testimonial.title}
-                      {testimonial.company !== '[ Empresa pendiente ]' && `, ${testimonial.company}`}
+                      {t.testimonials.placeholderTitle}
                     </p>
                   </div>
                 </div>

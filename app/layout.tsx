@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Archivo, Inter } from 'next/font/google'
 import './globals.css'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 // Fuente de títulos — arquitectural y poderosa
 const archivo = Archivo({
@@ -83,7 +84,9 @@ export default function RootLayout({
         className="min-h-full flex flex-col antialiased"
         style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   )

@@ -2,17 +2,9 @@
 
 // Sección About con contadores animados y texto corporativo
 import { useEffect, useRef, useState } from 'react'
-import { useInView } from 'framer-motion'
-import { useReducedMotion } from 'framer-motion'
+import { useInView, useReducedMotion } from 'framer-motion'
 import Reveal from './Reveal'
-
-// Datos de los contadores estadísticos
-const stats = [
-  { value: 15, suffix: '+', label: 'Years of Experience' },
-  { value: 12, suffix: '', label: 'Countries Operated' },
-  { value: 2400, suffix: '+', label: 'Operations Completed' },
-  { value: 100, suffix: '%', label: 'Confidentiality Rate' },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface CounterProps {
   target: number
@@ -78,6 +70,8 @@ function AnimatedCounter({ target, suffix, label }: CounterProps) {
 }
 
 export default function About() {
+  const { t } = useLanguage()
+
   return (
     <section
       id="about"
@@ -101,7 +95,7 @@ export default function About() {
                 className="text-xs font-medium tracking-widest uppercase mb-4"
                 style={{ color: '#C8A349', letterSpacing: '0.25em', fontFamily: 'var(--font-inter), sans-serif' }}
               >
-                About GOEA
+                {t.about.label}
               </p>
             </Reveal>
 
@@ -116,9 +110,9 @@ export default function About() {
                   letterSpacing: '-0.01em',
                 }}
               >
-                Elite Protection.
+                {t.about.headline}
                 <br />
-                <span style={{ color: '#C8A349' }}>Global Reach.</span>
+                <span style={{ color: '#C8A349' }}>{t.about.headlineAccent}</span>
               </h2>
             </Reveal>
 
@@ -127,10 +121,7 @@ export default function About() {
                 className="font-light mb-5 leading-relaxed"
                 style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', fontSize: '1rem' }}
               >
-                Founded by veterans of Argentine and international special operations units, GOEA
-                has provided discreet, high-stakes protection and security consulting for over
-                15 years. Our operational culture is built on three non-negotiable values:
-                precision, confidentiality, and results.
+                {t.about.p1}
               </p>
             </Reveal>
 
@@ -139,10 +130,7 @@ export default function About() {
                 className="font-light mb-5 leading-relaxed"
                 style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', fontSize: '1rem' }}
               >
-                From executive protection in Buenos Aires to risk management operations across
-                Latin America, the Middle East, and Europe, our teams operate seamlessly in
-                high-pressure environments. We have protected heads of state, Fortune 500
-                executives, and high-net-worth families across 12 countries.
+                {t.about.p2}
               </p>
             </Reveal>
 
@@ -151,9 +139,7 @@ export default function About() {
                 className="font-light leading-relaxed"
                 style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', fontSize: '1rem' }}
               >
-                Discretion is not a service feature — it is our operational standard. Every
-                engagement is treated with the absolute confidentiality our clients require
-                and deserve. GOEA is not a security firm. It is a trusted partner.
+                {t.about.p3}
               </p>
             </Reveal>
           </div>
@@ -164,7 +150,7 @@ export default function About() {
               className="grid grid-cols-2 gap-0"
               style={{ border: '1px solid rgba(200,163,73,0.15)' }}
             >
-              {stats.map((stat, i) => (
+              {t.about.stats.map((stat, i) => (
                 <div
                   key={stat.label}
                   style={{

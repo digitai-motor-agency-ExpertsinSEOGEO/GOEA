@@ -4,6 +4,7 @@
 import { useState, type FormEvent } from 'react'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import Reveal from './Reveal'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // Tipo para el estado del formulario
 interface FormState {
@@ -22,40 +23,17 @@ const initialState: FormState = {
   message: '',
 }
 
-const serviceOptions = [
-  'Executive Protection',
-  'Corporate Security',
-  'Risk Assessment',
-  'Tactical Consulting',
-  'Professional Training',
-  'Security Planning',
-]
-
-const contactInfo = [
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'contacto@goea.com.ar',
-    href: 'mailto:contacto@goea.com.ar',
-  },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '[TELÉFONO PENDIENTE]',
-    href: '#',
-  },
-  {
-    icon: MapPin,
-    label: 'Location',
-    value: '[CIUDAD, PAÍS]',
-    href: '#',
-  },
-]
-
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initialState)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const { t } = useLanguage()
+
+  const contactInfoItems = [
+    { icon: Mail, label: t.contact.info.emailLabel, value: t.contact.info.email, href: `mailto:${t.contact.info.email}` },
+    { icon: Phone, label: t.contact.info.phoneLabel, value: t.contact.info.phone, href: '#' },
+    { icon: MapPin, label: t.contact.info.locationLabel, value: t.contact.info.location, href: '#' },
+  ]
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -110,7 +88,7 @@ export default function Contact() {
                 className="text-xs font-medium tracking-widest uppercase mb-4"
                 style={{ color: '#C8A349', letterSpacing: '0.25em', fontFamily: 'var(--font-inter), sans-serif' }}
               >
-                Get In Touch
+                {t.contact.label}
               </p>
             </Reveal>
 
@@ -125,11 +103,9 @@ export default function Contact() {
                   lineHeight: '1.1',
                 }}
               >
-                Start a
+                {t.contact.headline}
                 <br />
-                <span style={{ color: '#C8A349' }}>Confidential</span>
-                <br />
-                Conversation.
+                <span style={{ color: '#C8A349' }}>{t.contact.headlineAccent}</span>
               </h2>
             </Reveal>
 
@@ -143,14 +119,13 @@ export default function Contact() {
                   maxWidth: '400px',
                 }}
               >
-                Every inquiry is handled with absolute discretion. Our team will respond
-                within 24 hours to qualified requests.
+                {t.contact.description}
               </p>
             </Reveal>
 
             {/* Información de contacto */}
             <div className="flex flex-col gap-6">
-              {contactInfo.map((item, i) => {
+              {contactInfoItems.map((item, i) => {
                 const Icon = item.icon
                 return (
                   <Reveal key={item.label} delay={0.3 + i * 0.1}>
@@ -210,13 +185,13 @@ export default function Contact() {
                     className="font-bold text-xl mb-3"
                     style={{ color: '#F5F5F3', fontFamily: 'var(--font-archivo), sans-serif' }}
                   >
-                    Message Received
+                    {t.contact.successTitle}
                   </h3>
                   <p
                     className="font-light"
                     style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', fontSize: '0.9rem' }}
                   >
-                    Thank you. Our team will contact you within 24 hours with complete discretion.
+                    {t.contact.successMessage}
                   </p>
                 </div>
               ) : (
@@ -228,7 +203,7 @@ export default function Contact() {
                       className="block text-xs tracking-widest uppercase mb-2"
                       style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                     >
-                      Full Name *
+                      {t.contact.form.name} *
                     </label>
                     <input
                       id="name"
@@ -240,7 +215,7 @@ export default function Contact() {
                       style={inputStyle}
                       onFocus={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.5)')}
                       onBlur={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.2)')}
-                      placeholder="Your full name"
+                      placeholder={t.contact.form.namePlaceholder}
                     />
                   </div>
 
@@ -252,7 +227,7 @@ export default function Contact() {
                         className="block text-xs tracking-widest uppercase mb-2"
                         style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                       >
-                        Email *
+                        {t.contact.form.email} *
                       </label>
                       <input
                         id="email"
@@ -264,7 +239,7 @@ export default function Contact() {
                         style={inputStyle}
                         onFocus={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.5)')}
                         onBlur={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.2)')}
-                        placeholder="your@email.com"
+                        placeholder={t.contact.form.emailPlaceholder}
                       />
                     </div>
                     <div>
@@ -273,7 +248,7 @@ export default function Contact() {
                         className="block text-xs tracking-widest uppercase mb-2"
                         style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                       >
-                        Phone
+                        {t.contact.form.phone}
                       </label>
                       <input
                         id="phone"
@@ -284,7 +259,7 @@ export default function Contact() {
                         style={inputStyle}
                         onFocus={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.5)')}
                         onBlur={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.2)')}
-                        placeholder="+1 (000) 000-0000"
+                        placeholder={t.contact.form.phonePlaceholder}
                       />
                     </div>
                   </div>
@@ -296,7 +271,7 @@ export default function Contact() {
                       className="block text-xs tracking-widest uppercase mb-2"
                       style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                     >
-                      Service Interest
+                      {t.contact.form.service}
                     </label>
                     <select
                       id="service"
@@ -307,10 +282,10 @@ export default function Contact() {
                       onFocus={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.5)')}
                       onBlur={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.2)')}
                     >
-                      <option value="" style={{ backgroundColor: '#15181E' }}>Select a service...</option>
-                      {serviceOptions.map((option) => (
-                        <option key={option} value={option} style={{ backgroundColor: '#15181E' }}>
-                          {option}
+                      <option value="" style={{ backgroundColor: '#15181E' }}>{t.contact.form.selectService}</option>
+                      {t.services.items.map((item) => (
+                        <option key={item.title} value={item.title} style={{ backgroundColor: '#15181E' }}>
+                          {item.title}
                         </option>
                       ))}
                     </select>
@@ -323,7 +298,7 @@ export default function Contact() {
                       className="block text-xs tracking-widest uppercase mb-2"
                       style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                     >
-                      Message *
+                      {t.contact.form.message} *
                     </label>
                     <textarea
                       id="message"
@@ -335,7 +310,7 @@ export default function Contact() {
                       style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }}
                       onFocus={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.5)')}
                       onBlur={(e) => (e.target.style.borderColor = 'rgba(200,163,73,0.2)')}
-                      placeholder="Briefly describe your security needs..."
+                      placeholder={t.contact.form.messagePlaceholder}
                     />
                   </div>
 
@@ -358,14 +333,14 @@ export default function Contact() {
                       e.currentTarget.style.backgroundColor = '#C8A349'
                     }}
                   >
-                    {loading ? 'Sending...' : 'Send Confidential Request'}
+                    {loading ? t.contact.sending : t.contact.form.submit}
                   </button>
 
                   <p
                     className="text-xs text-center"
                     style={{ color: '#5A6B4D', fontFamily: 'var(--font-inter), sans-serif' }}
                   >
-                    All information is treated with strict confidentiality.
+                    {t.contact.form.confidentiality}
                   </p>
                 </form>
               )}

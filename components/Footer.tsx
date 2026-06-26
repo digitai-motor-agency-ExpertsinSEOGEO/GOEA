@@ -1,25 +1,11 @@
 'use client'
 
 // Footer oscuro con logo, columnas de links y créditos
-
-const serviceLinks = [
-  'Executive Protection',
-  'Corporate Security',
-  'Risk Assessment',
-  'Tactical Consulting',
-  'Professional Training',
-  'Security Planning',
-]
-
-const quickLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Training', href: '#training' },
-  { label: 'Contact', href: '#contact' },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const { t } = useLanguage()
 
   return (
     <footer
@@ -50,8 +36,7 @@ export default function Footer() {
               className="text-sm font-light leading-relaxed mb-6"
               style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif' }}
             >
-              Grupo Operaciones Especiales Argentina. Elite protection and security consulting
-              for those who demand absolute discretion.
+              {t.footer.tagline}
             </p>
             {/* Línea decorativa */}
             <div
@@ -71,10 +56,10 @@ export default function Footer() {
                 letterSpacing: '0.2em',
               }}
             >
-              Services
+              {t.footer.servicesHeading}
             </h4>
             <ul className="flex flex-col gap-3">
-              {serviceLinks.map((service) => (
+              {t.footer.services.map((service) => (
                 <li key={service}>
                   <a
                     href="#services"
@@ -100,10 +85,10 @@ export default function Footer() {
                 letterSpacing: '0.2em',
               }}
             >
-              Navigation
+              {t.footer.navigationHeading}
             </h4>
             <ul className="flex flex-col gap-3">
-              {quickLinks.map((link) => (
+              {t.footer.links.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -129,7 +114,7 @@ export default function Footer() {
                 letterSpacing: '0.2em',
               }}
             >
-              Contact
+              {t.footer.contactHeading}
             </h4>
             <ul className="flex flex-col gap-4">
               <li>
@@ -137,7 +122,7 @@ export default function Footer() {
                   className="text-xs uppercase tracking-widest mb-1"
                   style={{ color: '#5A6B4D', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                 >
-                  Email
+                  {t.contact.info.emailLabel}
                 </p>
                 <a
                   href="mailto:contacto@goea.com.ar"
@@ -146,7 +131,7 @@ export default function Footer() {
                   onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#C8A349')}
                   onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#8A9099')}
                 >
-                  contacto@goea.com.ar
+                  {t.contact.info.email}
                 </a>
               </li>
               <li>
@@ -154,13 +139,13 @@ export default function Footer() {
                   className="text-xs uppercase tracking-widest mb-1"
                   style={{ color: '#5A6B4D', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                 >
-                  Phone
+                  {t.contact.info.phoneLabel}
                 </p>
                 <span
                   className="text-sm font-light"
                   style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif' }}
                 >
-                  [TELÉFONO PENDIENTE]
+                  {t.contact.info.phone}
                 </span>
               </li>
               <li>
@@ -168,13 +153,13 @@ export default function Footer() {
                   className="text-xs uppercase tracking-widest mb-1"
                   style={{ color: '#5A6B4D', fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.15em' }}
                 >
-                  Location
+                  {t.contact.info.locationLabel}
                 </p>
                 <span
                   className="text-sm font-light"
                   style={{ color: '#8A9099', fontFamily: 'var(--font-inter), sans-serif' }}
                 >
-                  [CIUDAD, PAÍS]
+                  {t.contact.info.location}
                 </span>
               </li>
             </ul>
@@ -192,13 +177,13 @@ export default function Footer() {
               className="text-xs font-light"
               style={{ color: '#5A6B4D', fontFamily: 'var(--font-inter), sans-serif' }}
             >
-              © {year} GOEA — Grupo Operaciones Especiales Argentina. All rights reserved.
+              © {year} GOEA — Grupo Operaciones Especiales Argentina. {t.footer.rights}
             </p>
             <p
               className="text-xs font-light"
               style={{ color: '#5A6B4D', fontFamily: 'var(--font-inter), sans-serif' }}
             >
-              All information is treated with strict confidentiality.
+              {t.footer.confidentiality}
             </p>
           </div>
         </div>

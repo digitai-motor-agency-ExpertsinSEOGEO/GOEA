@@ -4,11 +4,13 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null)
   const prefersReducedMotion = useReducedMotion()
   const [mounted, setMounted] = useState(false)
+  const { t } = useLanguage()
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -26,6 +28,9 @@ export default function Hero() {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
+
+  // Split headline on \n for line breaks
+  const headlineLines = t.hero.headline.split('\n')
 
   return (
     <section
@@ -158,7 +163,7 @@ export default function Hero() {
                 fontFamily: 'var(--font-inter), sans-serif',
               }}
             >
-              Grupo Operaciones Especiales Argentina
+              {t.hero.label}
             </motion.p>
 
             {/* H1 principal */}
@@ -175,11 +180,19 @@ export default function Hero() {
                 lineHeight: '0.95',
               }}
             >
-              Protection
-              <br />
-              <span style={{ color: '#C8A349' }}>Without</span>
-              <br />
-              Compromise.
+              {headlineLines[0]}
+              {headlineLines.length > 1 && (
+                <>
+                  <br />
+                  <span style={{ color: '#C8A349' }}>{headlineLines[1]}</span>
+                </>
+              )}
+              {headlineLines.length > 2 && (
+                <>
+                  <br />
+                  {headlineLines[2]}
+                </>
+              )}
             </motion.h1>
 
             {/* Subtítulo */}
@@ -195,7 +208,7 @@ export default function Hero() {
                 maxWidth: '520px',
               }}
             >
-              Executive Protection&nbsp;•&nbsp;Risk Management&nbsp;•&nbsp;Tactical Consulting&nbsp;•&nbsp;Professional Training
+              {t.hero.subheadline}
             </motion.p>
 
             {/* CTAs */}
@@ -224,7 +237,7 @@ export default function Hero() {
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                Request a Confidential Consultation
+                {t.hero.ctaPrimary}
               </button>
 
               {/* CTA secundario */}
@@ -246,7 +259,7 @@ export default function Hero() {
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                Our Services
+                {t.hero.ctaSecondary}
               </button>
             </motion.div>
           </div>
@@ -268,7 +281,7 @@ export default function Hero() {
           className="text-xs tracking-widest uppercase"
           style={{ fontFamily: 'var(--font-inter), sans-serif', letterSpacing: '0.2em', fontSize: '9px' }}
         >
-          Scroll
+          {t.hero.scrollLabel}
         </span>
         <ChevronDown size={16} />
       </motion.button>

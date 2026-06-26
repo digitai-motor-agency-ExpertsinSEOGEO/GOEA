@@ -5,39 +5,9 @@ import { useState } from 'react'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { Shield, Eye, Search, Target, GraduationCap, Map } from 'lucide-react'
 import Reveal from './Reveal'
+import { useLanguage } from '@/contexts/LanguageContext'
 
-const services = [
-  {
-    icon: Shield,
-    title: 'Executive Protection',
-    description: 'Tailored close protection for executives, VIPs, and high-risk environments.',
-  },
-  {
-    icon: Eye,
-    title: 'Corporate Security',
-    description: 'Comprehensive security audits and implementation for corporate facilities.',
-  },
-  {
-    icon: Search,
-    title: 'Risk Assessment',
-    description: 'Intelligence-led threat analysis and vulnerability mapping.',
-  },
-  {
-    icon: Target,
-    title: 'Tactical Consulting',
-    description: 'Strategic guidance from seasoned field operatives.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Professional Training',
-    description: 'Elite training programs for security professionals.',
-  },
-  {
-    icon: Map,
-    title: 'Security Planning',
-    description: 'End-to-end operational security planning and management.',
-  },
-]
+const icons = [Shield, Eye, Search, Target, GraduationCap, Map]
 
 // Variantes para el stagger de las cards
 const containerVariants: Variants = {
@@ -59,6 +29,7 @@ const cardVariants: Variants = {
 export default function CoreServices() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const prefersReducedMotion = useReducedMotion()
+  const { t } = useLanguage()
 
   return (
     <section
@@ -74,7 +45,7 @@ export default function CoreServices() {
               className="text-xs font-medium tracking-widest uppercase mb-4"
               style={{ color: '#C8A349', letterSpacing: '0.25em', fontFamily: 'var(--font-inter), sans-serif' }}
             >
-              What We Do
+              {t.services.label}
             </p>
             <h2
               className="font-black uppercase"
@@ -85,7 +56,7 @@ export default function CoreServices() {
                 letterSpacing: '-0.01em',
               }}
             >
-              Core Services
+              {t.services.headline}
             </h2>
           </div>
         </Reveal>
@@ -98,8 +69,8 @@ export default function CoreServices() {
           whileInView={prefersReducedMotion ? undefined : 'visible'}
           viewport={{ once: true, margin: '-64px' }}
         >
-          {services.map((service, index) => {
-            const Icon = service.icon
+          {t.services.items.map((service, index) => {
+            const Icon = icons[index]
             const isHovered = hoveredIndex === index
 
             return (
@@ -159,7 +130,7 @@ export default function CoreServices() {
                     fontSize: '0.9rem',
                   }}
                 >
-                  {service.description}
+                  {service.desc}
                 </p>
 
                 {/* Línea accent inferior al hover */}
